@@ -14,7 +14,7 @@ jobs:
         with:
           node-version: '22'
       - name: Install pnpm CLI
-        run: npm install -g pnpm@10.9.2
+        run: npm install -g pnpm
       - name: Install pnpm dependencies
         run: pnpm install --frozen-lockfile
       - name: Build React vite app
