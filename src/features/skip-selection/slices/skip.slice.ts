@@ -1,5 +1,5 @@
 import {createSlice, type PayloadAction} from '@reduxjs/toolkit';
-import type {Skip} from "@/features/skip-selection/skip.model.ts";
+import type {Skip} from "@/features/skip-selection/models/skip.model.ts";
 
 interface SkipState {
     selectedSkip: Skip | null;

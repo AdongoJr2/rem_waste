@@ -1,27 +1,68 @@
-import SkipGrid from "@/features/skip-selection/SkipGrid.tsx";
-import {useAppSelector} from "@/app/hooks.ts";
+import SkipGrid from "@/features/skip-selection/components/SkipGrid.tsx";
+import {useSelectedSkipItem} from "@/features/skip-selection/hooks/skip.hooks.ts";
+import {SelectedSkipSummary} from "@/features/skip-selection/components/SelectedSkipSummary.tsx";
+import {Button} from "@/components/ui/button.tsx";
+import {ChevronRight, XIcon} from "lucide-react";
+import {Sheet, SheetContent} from "@/components/ui/sheet.tsx";
+import {ThemeToggle} from "@/components/theme/theme-toggle.tsx";
 
 function SkipSelection() {
-    const selectedSkip = useAppSelector((state) => state.skip.selectedSkip);
+    const [selectedSkip, setSelectedSkip] = useSelectedSkipItem();
 
     return (
-        <div className="container mx-auto p-4">
-            <div className="mb-7 text-center">
-                <h1 className="text-2xl font-bold">Choose Your Skip Size</h1>
-                <p>Select the skip size that best suits your needs</p>
+        <div className="container mx-auto px-4 py-8 max-w-6xl">
+            <div className="flex items-center justify-center">
+                <ThemeToggle/>
             </div>
 
-            <SkipGrid/>
+            <div className="mt-5 mb-10 text-center">
+                <h1 className="text-3xl font-bold tracking-tight mb-3">Choose Your Skip Size</h1>
+                <p className="text-muted-foreground max-w-2xl mx-auto">
+                    Select the perfect skip size for your project's need
+                </p>
+            </div>
 
-            {selectedSkip && (
-                <div className="mt-4 bg-white p-4 rounded shadow">
-                    <h2 className="text-xl font-semibold">Selected: {selectedSkip.size} Yard Skip</h2>
-                    <p className="text-gray-700">14 day hire period</p>
-                    <p className="text-gray-700 font-semibold">
-                        £{(selectedSkip.price_before_vat * (1 + selectedSkip.vat / 100)).toFixed(2)}
-                    </p>
-                </div>
-            )}
+            <div className="mb-8">
+                <SkipGrid/>
+            </div>
+
+            {/* Selected Skip Summary Sheet */}
+            <Sheet open={!!selectedSkip} onOpenChange={() => setSelectedSkip(selectedSkip)}>
+                <SheetContent className="sm:max-w-md overflow-y-auto [&>button]:hidden">
+                    <div className="flex justify-end p-2">
+                        <XIcon className="size-6 cursor-pointer" onClick={() => setSelectedSkip(null)}/>
+                    </div>
+
+                    {selectedSkip && (
+                        <div className="pb-4 px-5">
+                            <SelectedSkipSummary skip={selectedSkip}/>
+
+                            <span className="text-sm italic text-muted-foreground">
+                                Imagery and information shown throughout this website may not reflect the exact shape
+                                or size specification, colours may vary, options and/or accessories may be featured at
+                                additional cost.
+                            </span>
+
+                            <div className="mt-6 flex flex-col gap-3">
+                                <Button
+                                    className="gap-2 w-full cursor-pointer"
+                                    onClick={() => setSelectedSkip(null)}
+                                >
+                                    Proceed
+                                    <ChevronRight className="h-4 w-4"/>
+                                </Button>
+                                <Button
+                                    variant="outline"
+                                    className="w-full cursor-pointer"
+                                    onClick={() => setSelectedSkip(null)}
+                                >
+                                    Change Selection
+                                </Button>
+                            </div>
+                        </div>
+                    )}
+                </SheetContent>
+            </Sheet>
         </div>
     );
 }

@@ -1,8 +1,11 @@
 import SkipSelection from "@/features/skip-selection/SkipSelection.tsx";
+import {ThemeProvider} from "@/components/theme/theme-provider.tsx";
 
 function App() {
     return (
-        <SkipSelection/>
+        <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+            <SkipSelection/>
+        </ThemeProvider>
     )
 }
 

@@ -1,5 +1,5 @@
 import {configureStore} from '@reduxjs/toolkit'
-import skipReducer from "@/features/skip-selection/skip.slice.ts"
+import skipReducer from "@/features/skip-selection/slices/skip.slice.ts"
 import {apiSlice} from "@/features/api/api.slice.ts";
 
 export const store = configureStore({

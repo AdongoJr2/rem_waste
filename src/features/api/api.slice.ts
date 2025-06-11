@@ -3,7 +3,7 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 export const apiSlice = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://app.wewantwaste.co.uk/api/',
+        baseUrl: import.meta.env.VITE_API_BASE_URL,
         prepareHeaders: (headers) => {
             return headers;
         },
