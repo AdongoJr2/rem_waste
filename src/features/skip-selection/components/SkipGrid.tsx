@@ -10,10 +10,10 @@ const SkipGrid = () => {
     if (isFetching) return <SkipGridSkeleton/>;
 
     if (error) return (
-        <Alert variant="destructive" className="bg-red-50">
-            <AlertCircleIcon/>
-            <AlertTitle>Error</AlertTitle>
-            <AlertDescription>
+        <Alert variant="destructive" className="bg-red-50 dark:bg-red-200">
+            <AlertCircleIcon className="dark:font-extrabold"/>
+            <AlertTitle className="dark:font-bold uppercase">Error</AlertTitle>
+            <AlertDescription className="dark:font-semibold">
                 Failed to load skips. Please try again later or contact support for assistance.
             </AlertDescription>
         </Alert>
